@@ -7,6 +7,7 @@ import com.util.MapBuilder;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.util.StringUtils;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
@@ -39,7 +40,7 @@ public class DigitalMQ {
         //factory.setHost("192.168.0.94");
         factory.setHost("localhost");
         //factory.setPort(5672);
-        factory.setPort(18888);
+        factory.setPort(0000);
         factory.setUsername("jnh");
         factory.setPassword("Welcome123");
         factory.setVirtualHost("/tesilian");
@@ -74,7 +75,11 @@ public class DigitalMQ {
         Channel channel = connection.createChannel();
         int count = 0;
         for (int i = 1; i < rows; i++) {
-            Long userId = Long.valueOf(sheet.getRow(i).getCell(1).getRawValue());
+            String value = sheet.getRow(i).getCell(1).getRawValue();
+            if (StringUtils.isEmpty(value)){
+                continue;
+            }
+            Long userId = Long.valueOf(value);
             System.out.println(userId);
             Map<String, Object> map = MapBuilder.normal().put("userId", userId).build();
             String raw = MapBuilder.normal()
