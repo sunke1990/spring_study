@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.db.mapper.BlockUserAssetBindMapper">
+
+    <resultMap id="BaseResultMap" type="com.db.entity.BlockUserAssetBind">
+        <!--@Table block_user_asset_bind-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="INTEGER"/>
+        <result property="bindType" column="bind_type" jdbcType="INTEGER"/>
+        <result property="bindId" column="bind_id" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="ownership" column="ownership" jdbcType="INTEGER"/>
+        <result property="relation" column="relation" jdbcType="INTEGER"/>
+        <result property="addUserId" column="add_user_id" jdbcType="INTEGER"/>
+        <result property="anchorUserId" column="anchor_user_id" jdbcType="INTEGER"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, user_id, bind_type, bind_id, create_time, update_time, ownership, relation, add_user_id, anchor_user_id, remark
+        from idecision.block_user_asset_bind
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, user_id, bind_type, bind_id, create_time, update_time, ownership, relation, add_user_id, anchor_user_id, remark
+        from idecision.block_user_asset_bind
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, user_id, bind_type, bind_id, create_time, update_time, ownership, relation, add_user_id, anchor_user_id, remark
+        from idecision.block_user_asset_bind
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="userId != null">
+                and user_id = #{userId}
+            </if>
+            <if test="bindType != null">
+                and bind_type = #{bindType}
+            </if>
+            <if test="bindId != null">
+                and bind_id = #{bindId}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="ownership != null">
+                and ownership = #{ownership}
+            </if>
+            <if test="relation != null">
+                and relation = #{relation}
+            </if>
+            <if test="addUserId != null">
+                and add_user_id = #{addUserId}
+            </if>
+            <if test="anchorUserId != null">
+                and anchor_user_id = #{anchorUserId}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into idecision.block_user_asset_bind(user_id, bind_type, bind_id, create_time, update_time, ownership, relation, add_user_id, anchor_user_id, remark)
+        values (#{userId}, #{bindType}, #{bindId}, #{createTime}, #{updateTime}, #{ownership}, #{relation}, #{addUserId}, #{anchorUserId}, #{remark})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update idecision.block_user_asset_bind
+        <set>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="bindType != null">
+                bind_type = #{bindType},
+            </if>
+            <if test="bindId != null">
+                bind_id = #{bindId},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="ownership != null">
+                ownership = #{ownership},
+            </if>
+            <if test="relation != null">
+                relation = #{relation},
+            </if>
+            <if test="addUserId != null">
+                add_user_id = #{addUserId},
+            </if>
+            <if test="anchorUserId != null">
+                anchor_user_id = #{anchorUserId},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from idecision.block_user_asset_bind where id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,10 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:mysql://192.168.0.23:3306/idecision?enabledTLSProtocols=TLSv1.2&characterEncoding=UTF-8&useUnicode=true&useSSL=true&autoReconnect=true&failOverReadOnly=false&serverTimezone=GMT%2B8&allowMultiQueries=true&sessionVariables=transaction_isolation='READ-COMMITTED'&useAffectedRows=true
+    username: idecision
+    password: iDecision@2020
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      connection-init-sqls: set names utf8mb4;

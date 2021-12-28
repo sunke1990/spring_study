@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.db.mapper.BlockMapper">
+
+    <resultMap id="BaseResultMap" type="com.db.entity.Block">
+        <!--@Table block-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="communityId" column="community_id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="streetId" column="street_id" jdbcType="INTEGER"/>
+        <result property="districtId" column="district_id" jdbcType="INTEGER"/>
+        <result property="cityId" column="city_id" jdbcType="INTEGER"/>
+        <result property="buildingNum" column="building_num" jdbcType="INTEGER"/>
+        <result property="roomNum" column="room_num" jdbcType="INTEGER"/>
+        <result property="bdcFlag" column="bdc_flag" jdbcType="INTEGER"/>
+        <result property="cmtFlag" column="cmt_flag" jdbcType="INTEGER"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="areaSum" column="area_sum" jdbcType="NUMERIC"/>
+        <result property="unitSum" column="unit_sum" jdbcType="INTEGER"/>
+        <result property="agreement" column="agreement" jdbcType="OTHER"/>
+        <result property="templateUrl" column="template_url" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, community_id, name, street_id, district_id, city_id, building_num, room_num, bdc_flag, cmt_flag, remark, update_time, create_time, address, area_sum, unit_sum, agreement, template_url
+        from idecision.block
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, community_id, name, street_id, district_id, city_id, building_num, room_num, bdc_flag, cmt_flag, remark, update_time, create_time, address, area_sum, unit_sum, agreement, template_url
+        from idecision.block
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, community_id, name, street_id, district_id, city_id, building_num, room_num, bdc_flag, cmt_flag, remark, update_time, create_time, address, area_sum, unit_sum, agreement, template_url
+        from idecision.block
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="communityId != null">
+                and community_id = #{communityId}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="streetId != null">
+                and street_id = #{streetId}
+            </if>
+            <if test="districtId != null">
+                and district_id = #{districtId}
+            </if>
+            <if test="cityId != null">
+                and city_id = #{cityId}
+            </if>
+            <if test="buildingNum != null">
+                and building_num = #{buildingNum}
+            </if>
+            <if test="roomNum != null">
+                and room_num = #{roomNum}
+            </if>
+            <if test="bdcFlag != null">
+                and bdc_flag = #{bdcFlag}
+            </if>
+            <if test="cmtFlag != null">
+                and cmt_flag = #{cmtFlag}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address}
+            </if>
+            <if test="areaSum != null">
+                and area_sum = #{areaSum}
+            </if>
+            <if test="unitSum != null">
+                and unit_sum = #{unitSum}
+            </if>
+            <if test="agreement != null">
+                and agreement = #{agreement}
+            </if>
+            <if test="templateUrl != null and templateUrl != ''">
+                and template_url = #{templateUrl}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into idecision.block(community_id, name, street_id, district_id, city_id, building_num, room_num, bdc_flag, cmt_flag, remark, update_time, create_time, address, area_sum, unit_sum, agreement, template_url)
+        values (#{communityId}, #{name}, #{streetId}, #{districtId}, #{cityId}, #{buildingNum}, #{roomNum}, #{bdcFlag}, #{cmtFlag}, #{remark}, #{updateTime}, #{createTime}, #{address}, #{areaSum}, #{unitSum}, #{agreement}, #{templateUrl})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update idecision.block
+        <set>
+            <if test="communityId != null">
+                community_id = #{communityId},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="streetId != null">
+                street_id = #{streetId},
+            </if>
+            <if test="districtId != null">
+                district_id = #{districtId},
+            </if>
+            <if test="cityId != null">
+                city_id = #{cityId},
+            </if>
+            <if test="buildingNum != null">
+                building_num = #{buildingNum},
+            </if>
+            <if test="roomNum != null">
+                room_num = #{roomNum},
+            </if>
+            <if test="bdcFlag != null">
+                bdc_flag = #{bdcFlag},
+            </if>
+            <if test="cmtFlag != null">
+                cmt_flag = #{cmtFlag},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+            <if test="areaSum != null">
+                area_sum = #{areaSum},
+            </if>
+            <if test="unitSum != null">
+                unit_sum = #{unitSum},
+            </if>
+            <if test="agreement != null">
+                agreement = #{agreement},
+            </if>
+            <if test="templateUrl != null and templateUrl != ''">
+                template_url = #{templateUrl},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from idecision.block where id = #{id}
+    </delete>
+
+</mapper>

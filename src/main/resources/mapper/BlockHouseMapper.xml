@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.db.mapper.BlockHouseMapper">
+
+    <resultMap id="BaseResultMap" type="com.db.entity.BlockHouse">
+        <!--@Table block_house-->
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="building" column="building" jdbcType="VARCHAR"/>
+        <result property="blockId" column="block_id" jdbcType="INTEGER"/>
+        <result property="floor" column="floor" jdbcType="INTEGER"/>
+        <result property="unit" column="unit" jdbcType="VARCHAR"/>
+        <result property="room" column="room" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="area" column="area" jdbcType="NUMERIC"/>
+        <result property="gridId" column="grid_id" jdbcType="INTEGER"/>
+        <result property="leasable" column="leasable" jdbcType="INTEGER"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="typ" column="typ" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          id, building, block_id, floor, unit, room, update_time, create_time, area, grid_id, leasable, address, typ
+        from idecision.block_house
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          id, building, block_id, floor, unit, room, update_time, create_time, area, grid_id, leasable, address, typ
+        from idecision.block_house
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+          id, building, block_id, floor, unit, room, update_time, create_time, area, grid_id, leasable, address, typ
+        from idecision.block_house
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="building != null and building != ''">
+                and building = #{building}
+            </if>
+            <if test="blockId != null">
+                and block_id = #{blockId}
+            </if>
+            <if test="floor != null">
+                and floor = #{floor}
+            </if>
+            <if test="unit != null and unit != ''">
+                and unit = #{unit}
+            </if>
+            <if test="room != null and room != ''">
+                and room = #{room}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="area != null">
+                and area = #{area}
+            </if>
+            <if test="gridId != null">
+                and grid_id = #{gridId}
+            </if>
+            <if test="leasable != null">
+                and leasable = #{leasable}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address}
+            </if>
+            <if test="typ != null">
+                and typ = #{typ}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into idecision.block_house(building, block_id, floor, unit, room, update_time, create_time, area, grid_id, leasable, address, typ)
+        values (#{building}, #{blockId}, #{floor}, #{unit}, #{room}, #{updateTime}, #{createTime}, #{area}, #{gridId}, #{leasable}, #{address}, #{typ})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update idecision.block_house
+        <set>
+            <if test="building != null and building != ''">
+                building = #{building},
+            </if>
+            <if test="blockId != null">
+                block_id = #{blockId},
+            </if>
+            <if test="floor != null">
+                floor = #{floor},
+            </if>
+            <if test="unit != null and unit != ''">
+                unit = #{unit},
+            </if>
+            <if test="room != null and room != ''">
+                room = #{room},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="area != null">
+                area = #{area},
+            </if>
+            <if test="gridId != null">
+                grid_id = #{gridId},
+            </if>
+            <if test="leasable != null">
+                leasable = #{leasable},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+            <if test="typ != null">
+                typ = #{typ},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from idecision.block_house where id = #{id}
+    </delete>
+
+</mapper>
