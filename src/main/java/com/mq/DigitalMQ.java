@@ -37,7 +37,7 @@ public class DigitalMQ {
         int rows = sheet.getPhysicalNumberOfRows();
         ConnectionFactory factory = new ConnectionFactory();
         //factory.setHost("192.168.0.94");
-        factory.setHost("61.142.135.13");
+        factory.setHost("localhost");
         //factory.setPort(5672);
         factory.setPort(18888);
         factory.setUsername("jnh");
